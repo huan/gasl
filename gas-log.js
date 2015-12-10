@@ -1,16 +1,25 @@
 (function () {
-  /**
-   *
-   * GasL - Logger-framework for Google Apps Script
-   *
-   * Github: https://github.com/zixia/gasl
-   *
-   * ChangeLog:
-   *    2015/10/31 init version
-   *    2015/12/04 modulization
-   *    2015/12/10 githubed!
-   *
-   */
+  /**************************************************************************************
+  *
+  * GasL - Google Apps Script Loging-framework
+  *
+  * Support log to Spreadsheet / Logger / LogEntries(next version) , 
+  * and very easy to extended to others.
+  *
+  * Github: https://github.com/zixia/gasl
+  *
+  * Example:
+        ```javascript
+        var gasLogLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
+        var GasLog = eval(UrlFetchApp.fetch(gasLogLib).getContentText())
+        
+        var log = new GasLog()
+        
+        log('Hello, %s!', 'World')
+        
+        ```
+  *
+  ***************************************************************************************/
   
   var LOG_LEVELS = { EMERG:    0
                     , ALERT:   1
@@ -26,22 +35,36 @@
   //LOG_LEVEL = LOG_LEVELS.DEBUG
 
   // default for GAS
-  var PRINT_DRIVER = loadPrintDriver('Logger')
+  var PRINTER = new LoggerPrinter()
   
+  
+  /****************************************************
+  *
+  * GasLog Constructor
+  *
+  ****************************************************/ 
   var gasLog_ = function (options) {
     var logLevel = LOG_LEVEL
-    var printDriver = PRINT_DRIVER
+    var printer = PRINTER
     
     if (options && options.logLevel) {  
       logLevel = loadLogLevel(options.logLevel)
     }
     
-    if (options && options.printDriver) {
-      printDriver = loadPrintDriver(options.printDriver)
+    if (options && options.printer) {
+      printer = options.printer
+      
+      if (!printer.isPrinter()) {
+        throw Error('options.printer ' + printer + ' is not a GasLog printer!')
+      }
     }
     
-    this.printDriver = printDriver
-    this.logLevel = logLevel
+    
+    /*****************************************
+    *
+    * Instance Methods Export
+    *
+    *****************************************/
 
     for (var logName in LOG_LEVELS) {
        doLog[logName] = LOG_LEVELS[logName]
@@ -51,10 +74,24 @@
     doLog.getLogLevel = getLogLevel
     doLog.setLogLevel = setLogLevel
     
-    // return log function
+    /**********************************
+    *
+    * Constructor initialize finished
+    *
+    ***********************************/
     return doLog
 
+    
     //////////////////////////////////////////////////////////////
+    // Instance Methods Implementions
+    //////////////////////////////////////////////////////////////
+    
+    
+    /**
+    *
+    * Log Level Getter & Setter
+    *
+    */
     function getLogLevel() { return logLevel }
     function setLogLevel(levelName) {
       logLevel = loadLogLevel(levelName)
@@ -64,8 +101,8 @@
     /**
     *
     *
-    * log(printDriver, level, msg, params...)
-    * or just log(printDriver, msg)
+    * log(level, msg, params...)
+    * or just log(msg)
     *
     *
     */
@@ -113,35 +150,107 @@
         message = args.join(' !!! ')
       }
       
-      printDriver(level, message)
+      printer(level, message)
       
     }
   }
   
+  /********************************
+  *
+  * Class Static Methods Export
+  *
+  *********************************/
+  gasLog_.Printer = {}
+  gasLog_.Printer.Logger = LoggerPrinter
+  gasLog_.Printer.Spreadsheet = SpreadsheetPrinter
+  
   return gasLog_
   
-///////////////////////////////////////////////////////////////////////////////
+  
+  ///////////////////////////////////////////////////////////////////////////////
+  // Class Static Method Implementations
+  ///////////////////////////////////////////////////////////////////////////////
+  
+  function LoggerPrinter() {
+    var loggerPrinter_ = function (level, message) {
+      return Logger.log(message)
+    }
+    
+    loggerPrinter_.isPrinter = function () { return true }
+    return loggerPrinter_
+  }
   
   /**
   *
-  * a print driver is a function that accept 2 params: level & msg , and print them.
+  * @param Object options
+  *   options.id        - Spreadsheet ID
+  *   options.url       - Spreadsheet URL
+  *   options.sheetName - Tab name of a sheet
+  *   options.clear     - true for clear all log sheet. default false
+  *   options.scroll    - 'DOWN' or 'UP', default DOWN
   *
   */
-  function loadPrintDriver(driverName) {
+  function SpreadsheetPrinter(options) {
     
-    var driver = function (level, msg) { throw Error('unimplenment print driver') }
+    if(typeof options != 'object') throw Error('options must set for Spreadsheet Printer')
     
-    switch (true) {
-      case /Logger/i.test(driverName):
-        driver = function (level, msg) { return Logger.log(msg) }
-        break;
-      default:
-        throw Error('unsupported driverName: ' + driverName)
-    }
-    return driver
-  }  
-  
 
+    var sheetName = options.sheetName || 'GasLogs'    
+    var clear = options.clear || false
+    var scroll = options.scroll || 'DOWN'
+    
+    var url = options.url
+    var id = options.id
+
+    var ss // Spreadsheet
+    
+    if (id) {
+      ss = SpreadsheetApp.openById(id)
+    } else if(url) {
+      ss = SpreadsheetApp.openByUrl(url)
+    } else {
+      throw Error('options must set url or id! for get the spreadsheet')
+    }
+
+    if (!ss) throw Error('SpreadsheetPrinter open ' + id + url + ' failed!')
+    
+    // Sheet for logging
+    var sheet = ss.getSheetByName(sheetName)
+    if (!sheet) {
+      sheet = ss.insertSheet(sheetName)
+      if (!sheet) throw Error('SpreadsheetPrint insertSheet ' + sheetName + ' failed!')
+    }
+
+    /**
+    * initialize headers if not exist in sheet
+    */
+    var range = sheet.getRange(1, 1, 1, 4)
+    var h = range.getValues()[0]
+    if (!h[0] && !h[1] && !h[2]) {
+      range.setValues([['Date', 'Level', 'Message', 'Powered by GasL - Google Apps Script Logging-framework - https://github.com/zixia/gasl']])
+    }   
+                   
+    if (clear) {
+      // keep header row (the 1st row)
+      sheet.getRange(2, 1, sheet.getLastRow(), sheet.getLastColumn()).clearContent()
+    }
+    
+    var spreadsheetPrinter_ = function (level, message) {
+      if (scroll=='UP') {
+        sheet
+        .insertRowBefore(2)
+        .getRange(2, 1, 1, 3)
+        .setValues([[new Date(), level, message]])
+      } else { // scroll DOWN
+        sheet.appendRow([new Date(), level, message])
+      }
+    }
+    
+    spreadsheetPrinter_.isPrinter = function () { return true }
+
+    return spreadsheetPrinter_
+  }
+  
   /**
   *
   *

@@ -9,30 +9,38 @@
     ```
     var gasLogLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
     var GasLog = eval(UrlFetchApp.fetch(gasLogLib).getContentText())
-  
-    var log = new GasLog({
-      logLevel: 'DEBUG'
-    })
+    var log = new GasLog()
     
-    log(log.INFO, 'Hello, %s!', 'World')
+    log('Hello, %s!', 'World')
 
     ```
 */
 
 
-function logLoopAll() {
-  
-  //////////////////////////////////////////////////////////////////////////////////////////
-  ///// GasLog include header start
+function gasl() {
+    
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // GasLog include header start
+  //
   var gasLogLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
   var GasLog = eval(UrlFetchApp.fetch(gasLogLib).getContentText())
+
+  var printer = new GasLog.Printer.Spreadsheet({
+    url: 'https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0'
+    , sheetName: 'Logs'
+    , clear: true
+    , scroll: 'UP'
+  })
   
   var log = new GasLog({
-    printDriver: 'Logger'
+    printer: printer
     , logLevel: 'INFO'
   })
-  ///// GasLog include header end
-  //////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // GasLog include header end
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
   
   for (var n=0; n<=log.DEBUG; n++) {
     testLog_(n)
@@ -46,7 +54,7 @@ function logLoopAll() {
     
     log.setLogLevel(level)
     
-    log(log.EMERG, '### Current log level is %s : %s ###', level, log.getLogLevel())
+    log(level, '### Current log level is %s : %s ###', level, log.getLogLevel())
     log('Hello, I am a default level message')  
     
     log(log.EMERG  , 'this is a %s level msg', 'EMERG')
