@@ -1,20 +1,16 @@
-/**
-*
-* GasL - Logger-framework for Google Apps Script
-*
-* Github: https://github.com/zixia/gasl
-*
-* ChangeLog:
-*    2015/10/31 init version
-*    2015/12/04 modulization
-*    2015/12/10 githubed!
-*
-*/
-
-
-var GasLog = (function () {
-
-//  var [LOG_EMERG, LOG_ALERT, LOG_CRIT, LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO, LOG_DEBUG] = [0,1,2,3,4,5,6,7]
+(function () {
+  /**
+   *
+   * GasL - Logger-framework for Google Apps Script
+   *
+   * Github: https://github.com/zixia/gasl
+   *
+   * ChangeLog:
+   *    2015/10/31 init version
+   *    2015/12/04 modulization
+   *    2015/12/10 githubed!
+   *
+   */
   
   var LOG_LEVELS = { EMERG:    0
                     , ALERT:   1
@@ -44,8 +40,6 @@ var GasLog = (function () {
       printDriver = loadPrintDriver(options.printDriver)
     }
     
-    // return log function
-    
     this.printDriver = printDriver
     this.logLevel = logLevel
 
@@ -57,9 +51,7 @@ var GasLog = (function () {
     doLog.getLogLevel = getLogLevel
     doLog.setLogLevel = setLogLevel
     
-    //Logger.log(printDriver)
-    //Logger.log(logLevel)
-
+    // return log function
     return doLog
 
     //////////////////////////////////////////////////////////////
@@ -80,11 +72,6 @@ var GasLog = (function () {
       
       // make a shiftable array from arguments
       var args = Array.prototype.slice.call(arguments)
-//      Logger.log(args.join(','))
-      
-//      if (typeof printDriver != 'function') {
-//        throw Error('printDriver is ' + typeof printDriver + ', is not function!')
-//      }
 
       var level = logLevel // set to default before we parse params
       
@@ -99,7 +86,6 @@ var GasLog = (function () {
           */
           level = args.shift()
           level = loadLogLevel(level)
-          
           break;
           
         case 'string':
@@ -111,8 +97,6 @@ var GasLog = (function () {
       }
       
       // no log for lower priority messages then LOG_LEVEL
-//      Logger.log('level[' + level + '], logLevel[' + logLevel + ']')
-      
       if (level > logLevel) return
       
       /**
@@ -132,17 +116,6 @@ var GasLog = (function () {
       
     }
   }
-  
-//  gasLog_.log = log
-//  
-//  log.EMERG   = LOG_EMERG
-//  log.ALERT   = LOG_ALERT
-//  log.CRIT    = LOG_CRIT
-//  log.ERR     = LOG_ERR
-//  log.WARNING = LOG_WARNING
-//  log.NOTICE  = LOG_NOTICE
-//  log.INFO    = LOG_INFO
-//  log.DEBUG   = LOG_DEBUG
   
   return gasLog_
   
@@ -188,6 +161,5 @@ var GasLog = (function () {
     
     throw Error('options.logLevel[' + level + '] illegel')
   }
-
 
 }())
