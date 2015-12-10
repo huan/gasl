@@ -234,13 +234,15 @@
     }
     
     var spreadsheetPrinter_ = function (priority, message) {
+      var logRow = [new Date(), this.logIdent, priority, message]
+
       if (scroll=='UP') {
         sheet
         .insertRowBefore(2)
         .getRange(2, 1, 1, 4)
-        .setValues([[new Date(), this.logIdent, priority, message]])
+        .setValues([logRow])
       } else { // scroll DOWN
-        sheet.appendRow([new Date(), priority, message])
+        sheet.appendRow(logRow)
       }
     }
     
