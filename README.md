@@ -8,7 +8,7 @@ In order to write to different log destinations, GasL comes with a components na
 
 The following samples is runable. You maybe want to copy/paste it inside google script editor, then have a look by executing it.
 
-## Basic Sample:
+## Basic Usage:
 
 This sample use Logger for output. "Ctrl + Enter" to get your logs.
 
@@ -20,7 +20,7 @@ var log = new GasLog()
 log('Hello, %s!', 'World')
 ```
 
-## Sample that use a Google Spreadsheet to output:
+## Log to a Google Spreadsheet:
 
 This sample use a spreadsheet to output. You can open the URL: https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0 , to see your log output.
 
@@ -59,11 +59,11 @@ var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText())
 ```
 GasLog is the main module of GasL.
 
-### `Printer`: compoment for output DI
+### `Printer`: Component for output DI
 
 GasLog.Printer is used by injector to enable output to different destination of GasT.
 
-It has 2 Printer: 
+It has 2 Printer now: (more will easy to be support in the furture) 
 
 1. `GasLog.Printer.Logger`
 1. `GasLog.Printer.Spreadsheet`
@@ -139,6 +139,12 @@ log the message by `format` of `priority`.
   1. `log.INFO`
   1. `log.DEBUG`
 
+
+```javascript
+var msg = 'test'
+log(log.WARNING, 'This is a warning message: %s', msg)
+```
+
 ### `log.setPriority(priority)`
 
 Set priority for this log.
@@ -171,14 +177,18 @@ var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
 var GasLog=eval(UrlFetchApp.fetch(gaslLib).getContentText())
 ```
 
-Then you are ready to use `var log = new GasLog(...)`.
+Then you are ready to use:
+
+```javascript
+var log = new GasLog(...)
+log(...)
+```
 
 ## Support
 
 The GasL source code repository is hosted on GitHub. There you can file bugs on the issue tracker or submit tested pull requests for review. ( https://github.com/zixia/gasl/issues )
 
 For real-world examples from open-source projects using GasL, see Projects Using TasL on the wiki. ( https://github.com/zixia/gasl/wiki )
-
 
 ## Version history
 
