@@ -73,7 +73,7 @@
     doLog.getPriority = getPriority
     doLog.setPriority = setPriority
     
-    doLog.logIdent = logIdent
+    logPrinter.ident = logIdent
 
     /**********************************
     *
@@ -150,7 +150,7 @@
         message = args.join(' !!! ')
       }
       
-      logPrinter.call(this, priority, message)
+      logPrinter(priority, message)
       
     }
   }
@@ -160,9 +160,10 @@
   * Class Static Methods Export
   *
   *********************************/
-  gasLog_.Printer = {}
-  gasLog_.Printer.Logger = LoggerPrinter
-  gasLog_.Printer.Spreadsheet = SpreadsheetPrinter
+  gasLog_.Printer = {
+    Logger: LoggerPrinter
+    , Spreadsheet: SpreadsheetPrinter
+  }
   
   return gasLog_
   
@@ -193,7 +194,6 @@
   function SpreadsheetPrinter(options) {
     
     if(typeof options != 'object') throw Error('options must set for Spreadsheet Printer')
-    
 
     var sheetName = options.sheetName || 'GasLogs'    
     var clear = options.clear || false
@@ -235,8 +235,16 @@
       sheet.getRange(2, 1, sheet.getLastRow(), sheet.getLastColumn()).clearContent()
     }
     
+    /**
+    *
+    * Spreadsheet Printer 
+    *
+    */
     var spreadsheetPrinter_ = function (priority, message) {
-      var logRow = [new Date(), this.logIdent, priority, message]
+
+      var ident = arguments.callee.ident
+      
+      var logRow = [new Date(), ident, priority, message]
 
       if (scroll=='UP') {
         sheet

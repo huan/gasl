@@ -22,24 +22,26 @@ function gasl() {
   //
   // GasLog include header start
   //
-  var gasLogLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-  var GasLog = eval(UrlFetchApp.fetch(gasLogLib).getContentText())
+  var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
+  var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText())
 
   var printer = new GasLog.Printer.Spreadsheet({
     url: 'https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0'
     , sheetName: 'Logs'
     , clear: true
-    , scroll: 'UP'
+    , scroll: 'DOWN'
   })
   
   var log = new GasLog({
     printer: printer
     , priority: 'INFO'
+    , ident: 'zixia'
   })
   //
   // GasLog include header end
   //
   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
   
   for (var n=0; n<=log.DEBUG; n++) {
     testLog_(n)
@@ -68,3 +70,4 @@ function gasl() {
   }
   
 }
+
