@@ -73,6 +73,8 @@
     doLog.getPriority = getPriority
     doLog.setPriority = setPriority
     
+    doLog.logIdent = logIdent
+
     /**********************************
     *
     * Constructor initialize finished
