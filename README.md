@@ -59,6 +59,22 @@ var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText())
 ```
 GasLog is the main module of GasL.
 
+Constructor options:
+
+1. `printer`: Printer Component for DI. See the following `Printer` part.
+1. `priority`: Log priority. See the following `log(priority, format, ...)` part.
+1. `ident`: The name of the program who are loging.
+
+```javascript
+var loggerPrinter = new GasLog.Printer.Logger()
+
+var log = new GasLog({
+  printer: loggerPrinter
+  , priority: 'INFO'
+  , ident: 'foo'
+})
+```
+
 ### `Printer`: Component for output DI
 
 GasLog.Printer is used by injector to enable output to different destination of GasT.
@@ -191,6 +207,9 @@ The GasL source code repository is hosted on GitHub. There you can file bugs on 
 For real-world examples from open-source projects using GasL, see Projects Using TasL on the wiki. ( https://github.com/zixia/gasl/wiki )
 
 ## Version history
+
+### 0.2.0 (December 10, 2015)
+* Support set ident name in options
 
 ### 0.1.0 (December 10, 2015)
 * Initial public release.
