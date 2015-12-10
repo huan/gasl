@@ -8,7 +8,7 @@ In order to write to different log destinations, GasL comes with a components na
 
 The following samples is runable. You maybe want to copy/paste it inside google script editor, then have a look by executing it.
 
-## Basic Usage:
+## Example 1 - Basic Usage
 
 This sample use Logger for output. "Ctrl + Enter" to get your logs.
 
@@ -20,7 +20,7 @@ var log = new GasLog()
 log('Hello, %s!', 'World')
 ```
 
-## Log to a Google Spreadsheet:
+## Example 2 - Log to Google Spreadsheet:
 
 This sample use a spreadsheet to output. You can open the URL: https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0 , to see your log output.
 
@@ -45,7 +45,7 @@ log(log.INFO, 'Hello, %s!', 'Spreadsheet')
 
 GasL is designed for running javascript on Google Apps Script environment only.
 
-## How to Logging
+## Module Methods
 
 There's a very simple example at https://github.com/zixia/gasl/blob/master/gasl-demo.js , which is the demo sample code of GasL.
 
@@ -177,16 +177,16 @@ Get priority for this log.
 var priority = log.getPriority()
 ```
 
-## Screen Snapshoot
+## Screen Snapshot
 ![GasLog for Google Apps Script](https://raw.githubusercontent.com/zixia/gasl/master/gas-log.png)
 
 A online version of google spreadsheet bounded with GasL google apps scripts can be found here: 
 * Spreadsheet - https://docs.google.com/spreadsheets/d/19M2DY3hunU6tDQFX5buJmZ_f3E8VFmlqAtodyC-J8Ag/edit#gid=1761137024
 * Script editor - https://script.google.com/a/zixia.net/macros/d/Mta4oea1VMIugfSGRo4QrAnKRT9d30hqB/edit?uiv=2&mid=ACjPJvGt4gnXjJwXnToB0jIMEbSvqKUF6vH-uq-m59SqnjXqTQ03NDn_khlNE6ha_mPnrOAYEnyFk80nHYmt_hppO3AgDkO_vVLrYJXzcPPagwRromd0znfLreNFAu4p0rYTC-Jlo-sAKOM
 
-## Using GasL in Google Apps Script
+## How to use GasL in Google Apps Script
 
-Install GasL is very easy: just copy/paste the following javascript code to your Code.gs file, then you are ready to use GasL.
+Use GasL is very easy: just copy/paste the following javascript code to your Code.gs file, then you are ready to use GasL.
 
 ```javascript
 var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
@@ -208,7 +208,7 @@ For real-world examples from open-source projects using GasL, see Projects Using
 
 ## Version history
 
-### 0.2.0 (December 10, 2015)
+### 0.2.0 (December 11, 2015)
 * Support set ident name in options
 
 ### 0.1.0 (December 10, 2015)
