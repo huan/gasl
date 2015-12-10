@@ -46,9 +46,9 @@
     }
     
     if (options && options.printer) {
-      printer = options.printer
-      
-      if (!printer.isPrinter()) {
+      logPrinter = options.printer
+           
+      if (!logPrinter.isPrinter()) {
         throw Error('options.printer ' + printer + ' is not a GasLog printer!')
       }
     }
@@ -169,7 +169,7 @@
       return Logger.log(message)
     }
     
-    loggerPrinter_.isPrinter = function () { return true }
+    loggerPrinter_.isPrinter = function () { return 'Logger' }
     return loggerPrinter_
   }
   
@@ -239,7 +239,7 @@
       }
     }
     
-    spreadsheetPrinter_.isPrinter = function () { return true }
+    spreadsheetPrinter_.isPrinter = function () { return 'Spreadsheet' }
 
     return spreadsheetPrinter_
   }

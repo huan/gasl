@@ -6,14 +6,13 @@
 * Github: https://github.com/zixia/gasl
 *
 * Example:
-    ```
-    var gasLogLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-    var GasLog = eval(UrlFetchApp.fetch(gasLogLib).getContentText())
-    var log = new GasLog()
-    
-    log('Hello, %s!', 'World')
+```
+var gasLogLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
+var GasLog = eval(UrlFetchApp.fetch(gasLogLib).getContentText())
+var log = new GasLog()
 
-    ```
+log('Hello, %s!', 'World')
+```
 */
 
 
@@ -54,7 +53,7 @@ function gasl() {
     
     log.setPriority(priority)
     
-    log(priority, '### Current log priority is %s : %s ###', priority, log.getPriority())
+    log(log.getPriority(), '### Current log priority is %s : %s ###', priority, log.getPriority())
     log('Hello, I am a default priority message')  
     
     log(log.EMERG  , 'this is a %s priority msg', 'EMERG')
@@ -69,4 +68,3 @@ function gasl() {
   }
   
 }
-
