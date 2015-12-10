@@ -235,14 +235,14 @@
       sheet.getRange(2, 1, sheet.getLastRow(), sheet.getLastColumn()).clearContent()
     }
     
-    /**
+    /***********************
     *
     * Spreadsheet Printer 
     *
-    */
+    ************************/
     var spreadsheetPrinter_ = function (priority, message) {
 
-      var ident = arguments.callee.ident
+      var ident = arguments.callee.ident || ''
       
       var logRow = [new Date(), ident, priority, message]
 
