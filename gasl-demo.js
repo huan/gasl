@@ -16,7 +16,7 @@
     
     log(log.INFO, 'Hello, %s!', 'World')
 
-```
+    ```
 */
 
 
