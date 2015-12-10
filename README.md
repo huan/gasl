@@ -178,7 +178,7 @@ var priority = log.getPriority()
 ```
 
 ## Screen Snapshot
-![GasLog for Google Apps Script](https://raw.githubusercontent.com/zixia/gasl/master/gas-log.gif)
+![GasL(GasLog) for GAS(Google Apps Script)](https://raw.githubusercontent.com/zixia/gasl/master/gas-log.png)
 
 A online version of google spreadsheet bounded with GasL google apps scripts can be found here: 
 * Spreadsheet - https://docs.google.com/spreadsheets/d/19M2DY3hunU6tDQFX5buJmZ_f3E8VFmlqAtodyC-J8Ag/edit#gid=1761137024
