@@ -21,7 +21,7 @@
   *
   ***************************************************************************************/
   
-  var LOG_LEVELS = { EMERG:    0
+  var PRIORITIES = { EMERG:    0
                     , ALERT:   1
                     , CRIT:    2
                     , ERR:     3
@@ -31,24 +31,18 @@
                     , DEBUG:   7
                    }
 
-  var LOG_LEVEL = LOG_LEVELS.INFO
-  //LOG_LEVEL = LOG_LEVELS.DEBUG
 
-  // default for GAS
-  var PRINTER = new LoggerPrinter()
-  
-  
   /****************************************************
   *
   * GasLog Constructor
   *
   ****************************************************/ 
   var gasLog_ = function (options) {
-    var logLevel = LOG_LEVEL
-    var printer = PRINTER
-    
-    if (options && options.logLevel) {  
-      logLevel = loadLogLevel(options.logLevel)
+    var logPriority = PRIORITIES.INFO
+    var logPrinter = new LoggerPrinter()
+
+    if (options && options.priority) {  
+      logPriority = loadPriority(options.priority)
     }
     
     if (options && options.printer) {
@@ -66,13 +60,13 @@
     *
     *****************************************/
 
-    for (var logName in LOG_LEVELS) {
-       doLog[logName] = LOG_LEVELS[logName]
+    for (var logName in PRIORITIES) {
+       doLog[logName] = PRIORITIES[logName]
     }
-    doLog.LOG_LEVELS = LOG_LEVELS
+    doLog.PRIORITIES = PRIORITIES
 
-    doLog.getLogLevel = getLogLevel
-    doLog.setLogLevel = setLogLevel
+    doLog.getPriority = getPriority
+    doLog.setPriority = setPriority
     
     /**********************************
     *
@@ -92,16 +86,16 @@
     * Log Level Getter & Setter
     *
     */
-    function getLogLevel() { return logLevel }
-    function setLogLevel(levelName) {
-      logLevel = loadLogLevel(levelName)
+    function getPriority() { return logPriority }
+    function setPriority(priorityName) {
+      logPriority = loadPriority(priorityName)
       return this
     }
     
     /**
     *
     *
-    * log(level, msg, params...)
+    * log(priority, msg, params...)
     * or just log(msg)
     *
     *
@@ -111,19 +105,18 @@
       // make a shiftable array from arguments
       var args = Array.prototype.slice.call(arguments)
 
-      var level = logLevel // set to default before we parse params
+      var priority = logPriority // set to default before we parse params
       
       switch (typeof args[0]) {
         case 'number':
           /**
           *
-          * determine LOG_LEVEL.
-          * if the 1st param is a valid log level(a Integer), then use it as log_level
-          * otherwise, set log_level to default(LOG_DEBUG)
+          * determine priority.
+          * if the 1st param is a valid log priority(a Integer), then use it as logPriority
+          * otherwise, set logPriority to default(priority in instance)
           *
           */
-          level = args.shift()
-          level = loadLogLevel(level)
+          priority = loadPriority(args.shift())
           break;
           
         case 'string':
@@ -134,8 +127,8 @@
           break;
       }
       
-      // no log for lower priority messages then LOG_LEVEL
-      if (level > logLevel) return
+      // no log for lower priority messages than logPriority
+      if (priority > logPriority) return
       
       /**
       *
@@ -150,7 +143,7 @@
         message = args.join(' !!! ')
       }
       
-      printer(level, message)
+      logPrinter(priority, message)
       
     }
   }
@@ -172,7 +165,7 @@
   ///////////////////////////////////////////////////////////////////////////////
   
   function LoggerPrinter() {
-    var loggerPrinter_ = function (level, message) {
+    var loggerPrinter_ = function (priority, message) {
       return Logger.log(message)
     }
     
@@ -235,14 +228,14 @@
       sheet.getRange(2, 1, sheet.getLastRow(), sheet.getLastColumn()).clearContent()
     }
     
-    var spreadsheetPrinter_ = function (level, message) {
+    var spreadsheetPrinter_ = function (priority, message) {
       if (scroll=='UP') {
         sheet
         .insertRowBefore(2)
         .getRange(2, 1, 1, 3)
-        .setValues([[new Date(), level, message]])
+        .setValues([[new Date(), priority, message]])
       } else { // scroll DOWN
-        sheet.appendRow([new Date(), level, message])
+        sheet.appendRow([new Date(), priority, message])
       }
     }
     
@@ -255,21 +248,21 @@
   *
   *
   */
-  function loadLogLevel(level) {
-    if (level % 1 === 0) {
+  function loadPriority(priority) {
+    if (priority % 1 === 0) {
       
-      return level
+      return priority
       
-    } else if (typeof level == 'string') {
-      level = level.toUpperCase()
-      if (level in LOG_LEVELS) {
+    } else if (typeof priority == 'string') {
+      priority = priority.toUpperCase()
+      if (priority in PRIORITIES) {
         
-        return LOG_LEVELS[level]
+        return PRIORITIES[priority]
         
       }
     } 
     
-    throw Error('options.logLevel[' + level + '] illegel')
+    throw Error('options.priority[' + priority + '] illegel')
   }
 
 }())

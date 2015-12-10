@@ -35,7 +35,7 @@ function gasl() {
   
   var log = new GasLog({
     printer: printer
-    , logLevel: 'INFO'
+    , priority: 'INFO'
   })
   //
   // GasLog include header end
@@ -46,25 +46,25 @@ function gasl() {
     testLog_(n)
   }
   
-  for (var logName in log.LOG_LEVELS) {
+  for (var logName in log.PRIORITIES) {
     testLog_(logName)
   }
 
-  function testLog_(level) {
+  function testLog_(priority) {
     
-    log.setLogLevel(level)
+    log.setPriority(priority)
     
-    log(level, '### Current log level is %s : %s ###', level, log.getLogLevel())
-    log('Hello, I am a default level message')  
+    log(priority, '### Current log priority is %s : %s ###', priority, log.getPriority())
+    log('Hello, I am a default priority message')  
     
-    log(log.EMERG  , 'this is a %s level msg', 'EMERG')
-    log(log.ALERT  , 'this is a %s level msg', 'ALERT')
-    log(log.CRIT   , 'this is a %s level msg', 'CRIT')
-    log(log.ERR    , 'this is a %s level msg', 'ERR')
-    log(log.WARNING, 'this is a %s level msg', 'WARNING')
-    log(log.NOTICE , 'this is a %s level msg', 'NOTICE')
-    log(log.INFO   , 'this is a %s level msg', 'INFO')
-    log(log.DEBUG  , 'this is a %s level msg', 'DEBUG')
+    log(log.EMERG  , 'this is a %s priority msg', 'EMERG')
+    log(log.ALERT  , 'this is a %s priority msg', 'ALERT')
+    log(log.CRIT   , 'this is a %s priority msg', 'CRIT')
+    log(log.ERR    , 'this is a %s priority msg', 'ERR')
+    log(log.WARNING, 'this is a %s priority msg', 'WARNING')
+    log(log.NOTICE , 'this is a %s priority msg', 'NOTICE')
+    log(log.INFO   , 'this is a %s priority msg', 'INFO')
+    log(log.DEBUG  , 'this is a %s priority msg', 'DEBUG')
     
   }
   
