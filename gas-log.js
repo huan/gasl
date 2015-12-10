@@ -40,6 +40,11 @@
   var gasLog_ = function (options) {
     var logPriority = PRIORITIES.INFO
     var logPrinter = new LoggerPrinter()
+    var logIdent = 'GasL'
+
+    if (options && options.ident) {
+      logIdent = options.ident
+    }
 
     if (options && options.priority) {  
       logPriority = loadPriority(options.priority)
@@ -49,7 +54,7 @@
       logPrinter = options.printer
            
       if (!logPrinter.isPrinter()) {
-        throw Error('options.printer ' + printer + ' is not a GasLog printer!')
+        throw Error('options.printer ' + logPrinter + ' is not a GasLog Printer!')
       }
     }
     
@@ -143,7 +148,7 @@
         message = args.join(' !!! ')
       }
       
-      logPrinter(priority, message)
+      logPrinter.call(this, priority, message)
       
     }
   }
@@ -217,10 +222,10 @@
     /**
     * initialize headers if not exist in sheet
     */
-    var range = sheet.getRange(1, 1, 1, 4)
+    var range = sheet.getRange(1, 1, 1, 5)
     var h = range.getValues()[0]
-    if (!h[0] && !h[1] && !h[2]) {
-      range.setValues([['Date', 'Level', 'Message', 'Powered by GasL - Google Apps Script Logging-framework - https://github.com/zixia/gasl']])
+    if (!h[0] && !h[1] && !h[2] && !h[3]) {
+      range.setValues([['Date', 'Ident', 'Priority', 'Message', 'Powered by GasL - Google Apps Script Logging-framework - https://github.com/zixia/gasl']])
     }   
                    
     if (clear) {
@@ -232,8 +237,8 @@
       if (scroll=='UP') {
         sheet
         .insertRowBefore(2)
-        .getRange(2, 1, 1, 3)
-        .setValues([[new Date(), priority, message]])
+        .getRange(2, 1, 1, 4)
+        .setValues([[new Date(), this.logIdent, priority, message]])
       } else { // scroll DOWN
         sheet.appendRow([new Date(), priority, message])
       }
