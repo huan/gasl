@@ -58,6 +58,7 @@
     function getLogLevel() { return logLevel }
     function setLogLevel(levelName) {
       logLevel = loadLogLevel(levelName)
+      return this
     }
     
     /**
