@@ -249,10 +249,10 @@ var GasLog = (function () {
     /**
     * initialize headers if not exist in sheet
     */
-    var range = sheet.getRange(1, 1, 1, 5)
+    var range = sheet.getRange(1, 1, 1, 6)
     var h = range.getValues()[0]
     if (!h[0] && !h[1] && !h[2] && !h[3]) {
-      range.setValues([['Date', 'Ident', 'Priority', 'Message', 'Powered by GasL - Google Apps Script Logging-framework - https://github.com/zixia/gasl']])
+      range.setValues([['Date', 'Ident', 'Priority', 'Message', 'Powered by GasL - Google Apps Script Logging-framework', 'https://github.com/zixia/gasl']])
     }   
     
     if (clear && sheet.getMaxRows() > 2) {
