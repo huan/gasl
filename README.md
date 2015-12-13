@@ -314,6 +314,7 @@ Use v0.4.0 in GAS
 * GasL v0.4.0 Initialization. (only if not initialized yet.)
 * https://github.com/zixia/gasl
 *
+*/
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
   eval(UrlFetchApp.fetch('https://github.com/zixia/gasl/blob/v0.4.0/src/gas-log-lib.js').getContentText())
 } // Class GasLog is ready for use now!
