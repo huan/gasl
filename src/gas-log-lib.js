@@ -248,14 +248,13 @@ var GasLog = (function () {
     if (!h[0] && !h[1] && !h[2] && !h[3]) {
       range.setValues([['Date', 'Ident', 'Priority', 'Message', 'Powered by GasL - Google Apps Script Logging-framework - https://github.com/zixia/gasl']])
     }   
-                   
-    if (clear) {
+    
+    if (clear && sheet.getMaxRows() > 2) {
       // keep header & first content row (the 1st & 2nd row)
       sheet.deleteRows(3, sheet.getMaxRows()-2)
       // clear content row, for keeping header format
       sheet.getRange(2, 1, 1, sheet.getLastColumn()).clearContent()
     }
-      Logger.log('clear: ' + clear + ', ' + sheet.getMaxRows())
     
     /***********************
     *
