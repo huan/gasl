@@ -42,7 +42,7 @@ var GasLog = (function () {
     var isDisabled = false
     
     var logPrinter = new LoggerPrinter()
-    var logIdent = 'GasL'
+    var logIdent = 'GasLog'
 
     if (options && options.ident) {
       logIdent = options.ident
@@ -58,7 +58,16 @@ var GasLog = (function () {
       if (!logPrinter.isPrinter()) {
         throw Error('options.printer ' + logPrinter + ' is not a GasLog Printer!')
       }
+      
     }
+    
+    
+    /**
+    * bind this to logPrinter, for use ident
+    * save ident name to instance
+    */
+    this.ident = logIdent
+    logPrinter = logPrinter.bind(this)
     
     
     /*****************************************
@@ -186,6 +195,7 @@ var GasLog = (function () {
   ///////////////////////////////////////////////////////////////////////////////
   
   function LoggerPrinter() {
+    
     var loggerPrinter_ = function (priority, message) {
       return Logger.log(message)
     }
@@ -262,8 +272,11 @@ var GasLog = (function () {
     *
     ************************/
     var spreadsheetPrinter_ = function (priority, message) {
-
-      var ident = arguments.callee.ident || ''
+     
+      var ident = ''
+      if (this && this.ident) {
+        ident = this.ident
+      }
       
       var logRow = [new Date(), ident, priority, message]
 
@@ -304,7 +317,10 @@ var GasLog = (function () {
     ************************/
     var logentriesPrinter_ = function (priority, message) {
 
-      var ident = arguments.callee.ident || ''
+      var ident = ''
+      if (this && this.ident) {
+        ident = this.ident
+      }
       
       var payload = ident + '\t' + priority + '\t' + message
 

@@ -39,13 +39,13 @@ function gaslForTestPriority() {
 
   var log = new GasLog()
     
-  log.disable()
+//  log.disable()
   
   for (var n=0; n<=log.DEBUG; n++) {
     testLog_(n)
   }
   
-  log.enable()
+//  log.enable()
   
   for (var logName in log.PRIORITIES) {
     testLog_(logName)
@@ -111,7 +111,7 @@ function gaslForSpreadSheet() {
   })
   
   log('Hello, I am a default priority message')
-  
+
   log(log.EMERG  , 'this is a %s priority msg', 'EMERG')
   log(log.ALERT  , 'this is a %s priority msg', 'ALERT')
   log(log.CRIT   , 'this is a %s priority msg', 'CRIT')
