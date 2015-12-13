@@ -39,7 +39,7 @@ var GasLog = (function () {
   ****************************************************/ 
   var gasLog_ = function (options) {
    
-    var logPriority = PRIORITIES.INFO
+    var logPriority = PRIORITIES.DEBUG
     var isDisabled = false
     
     var logPrinter = new LoggerPrinter()
