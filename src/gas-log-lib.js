@@ -251,7 +251,7 @@ var GasLog = (function () {
                    
     if (clear) {
       // keep header & first content row (the 1st & 2nd row)
-      sheet.deleteRows(3, sheet.getMaxRows()-1)
+      sheet.deleteRows(3, sheet.getMaxRows()-2)
       // clear content row, for keeping header format
       sheet.getRange(2, 1, 1, sheet.getLastColumn()).clearContent()
     }
