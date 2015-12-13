@@ -13,8 +13,10 @@ The following samples is runable. You maybe want to copy/paste it inside google 
 This sample use Logger for output. "Ctrl + Enter" to get your logs.
 
 ```javascript
-var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText())
+if (!gaslLib && !GasLog) { // GasL Initialization. (only if not initialized yet.)
+  var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
+  var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText());
+}
 var log = new GasLog()
     
 log('Hello, %s!', 'World')
@@ -25,8 +27,10 @@ log('Hello, %s!', 'World')
 This sample use a spreadsheet to output. You can open the URL: https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0 , to see your log output.
 
 ```javascript
-var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText())
+if (!gaslLib && !GasLog) { // GasL Initialization. (only if not initialized yet.)
+  var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
+  var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText());
+}
 
 var sheetPrinter = new GasLog.Printer.Spreadsheet({
   url: 'https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0'
@@ -54,8 +58,10 @@ There's a very simple example at https://github.com/zixia/gasl/blob/master/gasl-
 We use eval to get GasLog module in our code:
 
 ```javascript
-var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText())
+if (!gaslLib && !GasLog) { // GasL Initialization. (only if not initialized yet.)
+  var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
+  var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText());
+}
 ```
 GasLog is the main module of GasL.
 
@@ -92,8 +98,10 @@ It use the Logger.log of Google Apps Script to output.
 No need to set any options.
 
 ```javascript
-var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText())
+if (!gaslLib && !GasLog) { // GasL Initialization. (only if not initialized yet.)
+  var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
+  var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText());
+}
 
 var loggerPrinter = new GasLog.Printer.Logger()
 
@@ -115,8 +123,10 @@ You need to specify the param of options:
 1. `scroll`(string): 'UP' for insert new log to the top. default 'DOWN'. (OPTIONAL)
 
 ```javascript
-var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText())
+if (!gaslLib && !GasLog) { // GasL Initialization. (only if not initialized yet.)
+  var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
+  var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText());
+}
 
 var sheetPrinter = new GasLog.Printer.Spreadsheet({
   url: 'https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0'
@@ -142,8 +152,10 @@ Create a new log set in LogEntries.com , with `Manual - Token TCP` option. then 
 Put TOKEN in the only options: token.
 
 ```javascript
-var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText())
+if (!gaslLib && !GasLog) { // GasL Initialization. (only if not initialized yet.)
+  var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
+  var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText());
+}
 
 var logentriesPrinter = new GasLog.Printer.LogEntries({
   token: '4ea178f8-928d-3130-99ca-1f20ad803ec2' // this token is my logentries test log. welcome to write hello to me! :]
@@ -203,6 +215,24 @@ Get priority for this log.
 var priority = log.getPriority()
 ```
 
+### `log.disable()`
+
+Disable for logging. all message will be discarded when the log is in disabled state.
+
+```javascript
+log.disable()
+```
+It's useful when we are inside a `Custom Function` of spreadsheet. We have limited priviliges and can't write out.
+
+### `log.enable()`
+
+Enable for logging.
+
+```javascript
+log.enable()
+```
+
+
 ## Screen Snapshot
 ![GasL(GasLog) for GAS(Google Apps Script)](https://raw.githubusercontent.com/zixia/gasl/master/gas-log.png)
 
@@ -215,8 +245,10 @@ A online version of google spreadsheet bounded with GasL google apps scripts can
 Use GasL is very easy: just copy/paste the following javascript code to your Code.gs file, then you are ready to use GasL.
 
 ```javascript
-var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-var GasLog=eval(UrlFetchApp.fetch(gaslLib).getContentText())
+if (!gaslLib && !GasLog) { // GasL Initialization. (only if not initialized yet.)
+  var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
+  var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText());
+}
 ```
 
 Then you are ready to use:

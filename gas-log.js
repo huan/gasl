@@ -9,15 +9,16 @@
   * Github: https://github.com/zixia/gasl
   *
   * Example:
-        ```javascript
-        var gasLogLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-        var GasLog = eval(UrlFetchApp.fetch(gasLogLib).getContentText())
-        
-        var log = new GasLog()
-        
-        log('Hello, %s!', 'World')
-        
-        ```
+```javascript
+if (!gaslLib && !GasLog) { // GasL Initialization. (only if not initialized yet.)
+  var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
+  var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText());
+}
+
+var log = new GasLog()
+
+log('Hello, %s!', 'World')
+```
   *
   ***************************************************************************************/
   
@@ -39,6 +40,8 @@
   ****************************************************/ 
   var gasLog_ = function (options) {
     var logPriority = PRIORITIES.INFO
+    var isDisabled = false
+    
     var logPrinter = new LoggerPrinter()
     var logIdent = 'GasL'
 
@@ -72,6 +75,8 @@
 
     doLog.getPriority = getPriority
     doLog.setPriority = setPriority
+    doLog.disable = disable
+    doLog.enable = enable
     
     logPrinter.ident = logIdent
 
@@ -93,11 +98,14 @@
     * Log Level Getter & Setter
     *
     */
-    function getPriority() { return logPriority }
+    function getPriority() { return logPriority >= 0 ? logPriority : 0 }
     function setPriority(priorityName) {
       logPriority = loadPriority(priorityName)
       return this
     }
+    
+    function disable() { isDisabled = true }
+    function enable()  { isDisabled = false }
     
     /**
     *
@@ -112,7 +120,9 @@
       // make a shiftable array from arguments
       var args = Array.prototype.slice.call(arguments)
 
-      var priority = logPriority // set to default before we parse params
+      // set to default before we parse params
+      // max set to 0 , because -1 is the state of disabled.
+      var priority = getPriority()
       
       switch (typeof args[0]) {
         case 'number':
@@ -133,6 +143,9 @@
           throw Error('doLog(' + args[0] + ') need 1st param either be string or number!')
           break;
       }
+      
+      
+      if (isDisabled) return
       
       // no log for lower priority messages than logPriority
       if (priority > logPriority) return
