@@ -303,7 +303,7 @@ For real-world examples from open-source projects using GasL, see Projects Using
 
 ## Version history
 
-### [0.4.0](https://github.com/zixia/gasl/releases/tag/v0.4.0) (December 14, 2015)
+### [v0.4.0](https://github.com/zixia/gasl/releases/tag/v0.4.0) (December 14, 2015)
 * bug fix for spreadsheet printer
 * support multi log instance for different ident
 * LogEntries support
@@ -324,7 +324,7 @@ if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initia
 } // Class GasLog is ready for use now!
 ```
 
-### 0.1.0 (December 10, 2015)
+### v0.1.0 (December 10, 2015)
 * Initial public release.
 
 -------------------------------------------
