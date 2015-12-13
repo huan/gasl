@@ -1,4 +1,4 @@
-(function () {
+var GasLog = (function () {
   /**************************************************************************************
   *
   * GasL - Google Apps Script Loging-framework
@@ -9,16 +9,15 @@
   * Github: https://github.com/zixia/gasl
   *
   * Example:
-```javascript
-if (!gaslLib && !GasLog) { // GasL Initialization. (only if not initialized yet.)
-  var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-  var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText());
-}
+    ```javascript
+    if (!(typeof gaslLib) && !(typeof GasLog)) { // Initialize Class GasLog for GasL. (only if not inited)
+      eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js').getContentText())
+    }
 
-var log = new GasLog()
-
-log('Hello, %s!', 'World')
-```
+    var log = new GasLog()
+   
+    log('Hello, %s!', 'World')
+    ```
   *
   ***************************************************************************************/
   
@@ -255,6 +254,7 @@ log('Hello, %s!', 'World')
       //sheet.getRange(2, 1, sheet.getLastRow(), sheet.getLastColumn()).clearContent()
       sheet.deleteRows(2, sheet.getMaxRows()-1)
     }
+      Logger.log('clear: ' + clear + ', ' + sheet.getMaxRows())
     
     /***********************
     *
