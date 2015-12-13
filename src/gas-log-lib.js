@@ -81,6 +81,9 @@ var GasLog = (function () {
     }
     doLog.PRIORITIES = PRIORITIES
 
+    doLog.getIdent = function () { return logIdent }
+    doLog.getPrinter = function () { return logPrinter }
+    
     doLog.getPriority = getPriority
     doLog.setPriority = setPriority
     doLog.disable = disable
