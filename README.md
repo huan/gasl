@@ -1,6 +1,6 @@
 # GasL - Google Apps Script Logging-framework
 
-GasL is a logging framework for Google Apps Script(GAS). It provides a unix syslog like simple way for the GAS programs to log messages to Spreadsheet, LogEntries, RESTFUL API and Logger of GAS.
+GasL is a unix syslog like logging framework for Google Apps Script(GAS). It provides easy way for the GAS programs to log messages to Spreadsheet, LogEntries, RESTFUL API and Logger of GAS.
 
 Github: https://github.com/zixia/gasl
 
@@ -107,11 +107,12 @@ It use a Spreadsheet URL or ID to specify a sheet, then log to that sheet.
 
 You need to specify the param of options:
 
-1. `url`(string): Google Spreadsheet url. You must have the write permisstion for that spreadsheet. (one of url/id must be set)
-1. `id`(string): GoogleSpreadsheet id. You must have the write permisstion for that spreadsheet. (one of url/id must be set)
-1. `sheetName`(string): Tab name of the output sheet. Will be created if not exist.
-1. `clear`(bool): true for clear the sheet before output. default false.
-1. `scroll`(string): 'UP' for insert new log to the top. default 'DOWN'.
+1. `spreadsheet`(Spreadsheet): Google Spreadsheet object. You must have the write permisstion for that spreadsheet. (one of spreadsheet/url/id must be set)
+1. `id`(string): Google Spreadsheet id. You must have the write permisstion for that spreadsheet. (one of spreadsheet/url/id must be set)
+1. `url`(string): Google Spreadsheet url. You must have the write permisstion for that spreadsheet. (one of spreadsheet/url/id must be set)
+1. `sheetName`(string): Tab name of the output sheet. Will be created if not exist. default `GasLog`. (OPTIONAL)
+1. `clear`(bool): true for clear the sheet before output. default false. (OPTIONAL)
+1. `scroll`(string): 'UP' for insert new log to the top. default 'DOWN'. (OPTIONAL)
 
 ```javascript
 var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'

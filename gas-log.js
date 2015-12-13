@@ -199,12 +199,17 @@
     var clear = options.clear || false
     var scroll = options.scroll || 'DOWN'
     
-    var url = options.url
+    var spreadsheet = options.spreadsheet
     var id = options.id
+    var url = options.url
 
     var ss // Spreadsheet
     
-    if (id) {
+    if (spreadsheet) {
+      var isSs = spreadsheet.toString() == 'Spreadsheet'
+      if (!isSs) throw Error('options.spreadsheet[' + spreadsheet + '] is a Spreadsheet object!')
+      ss = spreadsheet
+    } else if (id) {
       ss = SpreadsheetApp.openById(id)
     } else if(url) {
       ss = SpreadsheetApp.openByUrl(url)
