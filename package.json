@@ -1,0 +1,31 @@
+{
+  "name": "GasL"
+  , "version": "0.1.0"
+  , "description": "GasL is a logging framework for Google Apps Script(GAS). It provides a unix syslog like simple way for the GAS programs to log messages to Spreadsheet, LogEntries, RESTFUL API and Logger of GAS."
+  , "main": "index.js"
+  , "directories": {
+    "doc": "doc"
+  }
+  , "dependencies": {
+  }
+  , "devDependencies": {
+    "node-google-apps-script": "^1.1.3"
+  }
+  , "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+    , "pull": "scripts/pull.sh"
+  }
+  , "repository": {
+    "type": "git"
+    , "url": "git@github.com:zixia/gasl.git"
+  }
+  , "keywords": [
+    "syslog"
+    , "javascript"
+    , "gas"
+    , "log"
+  ]
+  , "author": "Zhuohuan LI <zixia@zixia.net>"
+  , "license": "MIT"
+  , "homepage": "https://github.com/zixia/gasl"
+}
