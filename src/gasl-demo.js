@@ -18,6 +18,11 @@ log('Hello, %s!', 'World')
 */
 
 
+/*************************************************
+*
+* 1. Logger (Google Apps Script default logger)
+*
+**************************************************/
 function gaslForTestPriority() {
     
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -67,50 +72,11 @@ function gaslForTestPriority() {
 }
 
 
-function gaslForLogEntries() {
-  
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // GasLog include header start
-  //
-  if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
-    eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
-  } // Class GasLog is ready for use now!
-  //
-  // GasLog include header end
-  //
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
-  // This logentries is my test log. 
-  // Say hello to me is welcome! :]
-  var logentriesPrinter = new GasLog.Printer.LogEntries({
-    token: '4ea178f8-928d-3130-99ca-1f20ad803ec2'
-  })
-  
-  var log = new GasLog({
-    printer: logentriesPrinter
-    , priority: 'INFO'
-    , ident: 'GasLog'
-  })
-  
-  log('Hello, I am a default priority message')
-  
-  log(log.EMERG  , 'this is a %s priority msg', 'EMERG')
-  log(log.ALERT  , 'this is a %s priority msg', 'ALERT')
-  log(log.CRIT   , 'this is a %s priority msg', 'CRIT')
-  log(log.ERR    , 'this is a %s priority msg', 'ERR')
-  log(log.WARNING, 'this is a %s priority msg', 'WARNING')
-  log(log.NOTICE , 'this is a %s priority msg', 'NOTICE')
-  log(log.INFO   , 'this is a %s priority msg', 'INFO')
-  log(log.DEBUG  , 'this is a %s priority msg', 'DEBUG')
-}
-
-
-/**
+/*************************************************
 *
-* Spreadsheet
+* 2. Spreadsheet
 *
-*/
+**************************************************/
 function gaslForSpreadSheet() {
     
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -156,3 +122,44 @@ function gaslForSpreadSheet() {
   log(log.DEBUG  , 'this is a %s priority msg', 'DEBUG')
 }
 
+/*************************************************
+*
+* 3. LogEntries
+*
+**************************************************/
+function gaslForLogEntries() {
+  
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // GasLog include header start
+  //
+  if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
+    eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
+  } // Class GasLog is ready for use now!
+  //
+  // GasLog include header end
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+  // This logentries is my test log. Say hello to me is welcome! :]
+  var logentriesPrinter = new GasLog.Printer.LogEntries({
+    token: '4ea178f8-928d-3130-99ca-1f20ad803ec2'
+  })
+  
+  var log = new GasLog({
+    printer: logentriesPrinter
+    , priority: 'INFO'
+    , ident: 'GasLog'
+  })
+  
+  log('Hello, I am a default priority message')
+  
+  log(log.EMERG  , 'this is a %s priority msg', 'EMERG')
+  log(log.ALERT  , 'this is a %s priority msg', 'ALERT')
+  log(log.CRIT   , 'this is a %s priority msg', 'CRIT')
+  log(log.ERR    , 'this is a %s priority msg', 'ERR')
+  log(log.WARNING, 'this is a %s priority msg', 'WARNING')
+  log(log.NOTICE , 'this is a %s priority msg', 'NOTICE')
+  log(log.INFO   , 'this is a %s priority msg', 'INFO')
+  log(log.DEBUG  , 'this is a %s priority msg', 'DEBUG')
+}
