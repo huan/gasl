@@ -10,7 +10,7 @@ var GasLog = (function () {
   *
   * Example:
     ```javascript
-    if (!(typeof gaslLib) && !(typeof GasLog)) { // Initialize Class GasLog for GasL. (only if not inited)
+    if ((typeof GasLog)==='undefined') { // Initialize Class GasLog for GasL. (only if not inited)
       eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js').getContentText())
     } // Class GasLog is ready for use now!
     
@@ -38,6 +38,7 @@ var GasLog = (function () {
   *
   ****************************************************/ 
   var gasLog_ = function (options) {
+   
     var logPriority = PRIORITIES.INFO
     var isDisabled = false
     
@@ -61,15 +62,7 @@ var GasLog = (function () {
       
     }
     
-    
-    /**
-    * bind this to logPrinter, for use ident
-    * save ident name to instance
-    */
-    this.ident = logIdent
-    logPrinter = logPrinter.bind(this)
-    
-    
+        
     /*****************************************
     *
     * Instance Methods Export
@@ -89,8 +82,7 @@ var GasLog = (function () {
     doLog.disable = disable
     doLog.enable = enable
     
-    logPrinter.ident = logIdent
-
+        
     /**********************************
     *
     * Constructor initialize finished
@@ -173,8 +165,9 @@ var GasLog = (function () {
       } catch (e) {
         message = args.join(' !!! ')
       }
-      
-      logPrinter(priority, message)
+            
+      // bind this, for acess instance logIdent
+      logPrinter.call({ident: logIdent}, priority, message)
       
     }
   }
@@ -200,7 +193,7 @@ var GasLog = (function () {
   function LoggerPrinter() {
     
     var loggerPrinter_ = function (priority, message) {
-      return Logger.log(message)
+      return Logger.log(message) 
     }
     
     loggerPrinter_.isPrinter = function () { return 'Logger' }

@@ -17,6 +17,46 @@ log('Hello, %s!', 'World')
 ```
 */
 
+/**
+*
+* 0. debug
+*
+*/
+
+function gaslTest() {
+  var loggerLog = new GasLog({
+    ident: 'Logger'
+  })
+    
+  
+  var printer = new GasLog.Printer.Spreadsheet({
+    url: 'https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0'
+    , sheetName: 'Logs'
+  })
+  
+  var sheetLog1 = new GasLog({
+    printer: printer
+    , ident: 'SheetLog1'
+  })
+  
+  var sheetLog2 = new GasLog({
+    printer: printer
+    , ident: 'SheetLog2'
+  })
+
+    loggerLog('a ' + loggerLog.getPrinter().isPrinter())
+    sheetLog1('a ' + sheetLog1.getPrinter().isPrinter())
+    sheetLog2('a ' + sheetLog2.getPrinter().isPrinter())
+
+    loggerLog('a ' + loggerLog.getPrinter().isPrinter())
+    sheetLog1('a ' + sheetLog1.getPrinter().isPrinter())
+    sheetLog2('a ' + sheetLog2.getPrinter().isPrinter())
+
+    loggerLog('a ' + loggerLog.getPrinter().isPrinter())
+    sheetLog1('a ' + sheetLog1.getPrinter().isPrinter())
+    sheetLog2('a ' + sheetLog2.getPrinter().isPrinter())
+
+}
 
 /*************************************************
 *
