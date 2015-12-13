@@ -306,6 +306,10 @@ For real-world examples from open-source projects using GasL, see Projects Using
 ### [0.4.0](https://github.com/zixia/gasl/releases/tag/v0.4.0) (December 14, 2015)
 * bug fix for spreadsheet printer
 * support multi log instance for different ident
+* LogEntries support
+* new function: disable() & enable() 
+* GasLog.Printer implement document
+* Support set ident name in options
 
 Use v0.4.0 in GAS
 ```javascript
@@ -319,14 +323,6 @@ if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initia
   eval(UrlFetchApp.fetch('https://github.com/zixia/gasl/blob/v0.4.0/src/gas-log-lib.js').getContentText())
 } // Class GasLog is ready for use now!
 ```
-
-### 0.3.0 (December 13, 2015)
-* LogEntries support
-* new function: disable() & enable() 
-* GasLog.Printer implement document
-
-### 0.2.0 (December 11, 2015)
-* Support set ident name in options
 
 ### 0.1.0 (December 10, 2015)
 * Initial public release.
