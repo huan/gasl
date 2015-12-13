@@ -253,8 +253,7 @@ log('Hello, %s!', 'World')
     if (clear) {
       // keep header row (the 1st row)
       //sheet.getRange(2, 1, sheet.getLastRow(), sheet.getLastColumn()).clearContent()
-      sheet.deleteRows(2, sheet.getLastRow())
-
+      sheet.deleteRows(2, sheet.getMaxRows()-1)
     }
     
     /***********************
