@@ -1,7 +1,7 @@
 var GasLog = (function () {
   /**************************************************************************************
   *
-  * GasL - Google Apps Script Loging-framework
+  * GasL - Class GasLog - Google Apps Script Loging-framework
   *
   * Support log to Spreadsheet / Logger / LogEntries(next version) , 
   * and very easy to extended to others.
@@ -12,8 +12,8 @@ var GasLog = (function () {
     ```javascript
     if (!(typeof gaslLib) && !(typeof GasLog)) { // Initialize Class GasLog for GasL. (only if not inited)
       eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js').getContentText())
-    }
-
+    } // Class GasLog is ready for use now!
+    
     var log = new GasLog()
    
     log('Hello, %s!', 'World')

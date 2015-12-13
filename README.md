@@ -15,7 +15,8 @@ This sample use Logger for output. "Ctrl + Enter" to get your logs.
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
   eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
-}
+} // Class GasLog is ready for use now!
+
 var log = new GasLog()
     
 log('Hello, %s!', 'World')
@@ -28,7 +29,7 @@ This sample use a spreadsheet to output. You can open the URL: https://docs.goog
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
   eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
-}
+} // Class GasLog is ready for use now!
 
 var sheetPrinter = new GasLog.Printer.Spreadsheet({
   url: 'https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0'
@@ -58,7 +59,7 @@ We use eval to get GasLog module in our code:
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
   eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
-}
+} // Class GasLog is ready for use now!
 ```
 GasLog is the main module name of GasL.
 
@@ -97,7 +98,7 @@ No need to set any options.
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
   eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
-}
+} // Class GasLog is ready for use now!
 
 var loggerPrinter = new GasLog.Printer.Logger()
 
@@ -121,7 +122,7 @@ You need to specify the param of options:
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
   eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
-}
+} // Class GasLog is ready for use now!
 
 var sheetPrinter = new GasLog.Printer.Spreadsheet({
   url: 'https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0'
@@ -149,7 +150,7 @@ Put TOKEN in the only options: token.
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
   eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
-}
+} // Class GasLog is ready for use now!
 
 var logentriesPrinter = new GasLog.Printer.LogEntries({
   token: '4ea178f8-928d-3130-99ca-1f20ad803ec2' // this token is my logentries test log. welcome to write hello to me! :]
@@ -241,7 +242,7 @@ Use GasL is very easy: just copy/paste the following javascript code to your Cod
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
   eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
-}
+} // Class GasLog is ready for use now!
 ```
 
 Then you are ready to use:

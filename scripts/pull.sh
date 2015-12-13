@@ -8,6 +8,8 @@
 
 GIT_STATUS=$( git status -s | wc -l )
 
+[ "$1" = "force" ] && GIT_STATUS=0
+
 [ "$GIT_STATUS" -gt 0 ] && {
   git status
   echo

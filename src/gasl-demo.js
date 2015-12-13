@@ -7,10 +7,9 @@
 *
 * Example:
 ```
-if (!gaslLib && !GasLog) { // GasL Initialization. (if not initialized yet.)
-  var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-  var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText());
-}
+if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
+  eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
+} // Class GasLog is ready for use now!
 
 var log = new GasLog()
 
@@ -25,16 +24,15 @@ function gaslForTestPriority() {
   //
   // GasLog include header start
   //
-  if (!gaslLib && !GasLog) {
-    var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-//    var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText());
-  }
-
-  var log = new GasLog()
+  if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
+    eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
+  } // Class GasLog is ready for use now!
   //
   // GasLog include header end
   //
   ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  var log = new GasLog()
     
   log.disable()
   
@@ -71,8 +69,17 @@ function gaslForTestPriority() {
 
 function gaslForLogEntries() {
   
-  var gasLogLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
-//  var GasLog = eval(UrlFetchApp.fetch(gasLogLib).getContentText())
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // GasLog include header start
+  //
+  if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
+    eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
+  } // Class GasLog is ready for use now!
+  //
+  // GasLog include header end
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
   
   // This logentries is my test log. 
   // Say hello to me is welcome! :]
@@ -106,10 +113,17 @@ function gaslForLogEntries() {
 */
 function gaslForSpreadSheet() {
     
-  if (!(typeof gaslLib) && !(typeof GasLog)) { // GasL Init(if not inited)
-    eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js').getContentText())
-    Logger.log('newed: ' + typeof GasLog)
-  }
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // GasLog include header start
+  //
+  if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
+    eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
+  } // Class GasLog is ready for use now!
+  //
+  // GasLog include header end
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // This spreadsheet is my public writable doc. 
   // Say hello to me is welcome! :]  
