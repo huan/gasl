@@ -163,6 +163,7 @@
   gasLog_.Printer = {
     Logger: LoggerPrinter
     , Spreadsheet: SpreadsheetPrinter
+    , LogEntries: LogEntriesPrinter
   }
   
   return gasLog_
@@ -184,11 +185,12 @@
   /**
   *
   * @param Object options
-  *   options.id        - Spreadsheet ID
-  *   options.url       - Spreadsheet URL
-  *   options.sheetName - Tab name of a sheet
-  *   options.clear     - true for clear all log sheet. default false
-  *   options.scroll    - 'DOWN' or 'UP', default DOWN
+  *   options.spreadsheet - Spreadsheet Object
+  *   options.id          - Spreadsheet ID
+  *   options.url         - Spreadsheet URL
+  *   options.sheetName   - Name of the sheet tab
+  *   options.clear       - true for clear all log sheet. default false
+  *   options.scroll      - 'DOWN' or 'UP', default DOWN
   *
   */
   function SpreadsheetPrinter(options) {
@@ -264,6 +266,50 @@
     spreadsheetPrinter_.isPrinter = function () { return 'Spreadsheet' }
 
     return spreadsheetPrinter_
+  }
+
+  /**
+  *
+  * LogEntries Printer
+  *
+  * @param Object options
+  *   options.token - LogEntries TOKEN
+  *
+  */
+  function LogEntriesPrinter(options) {
+    
+    if(typeof options != 'object') throw Error('options must set for LogEntries Printer')
+
+    var TOKEN = options.token
+    if (!TOKEN) throw Error('options.token must set for LogEntries Printer')
+    
+    /***********************
+    *
+    * LogEntries Printer 
+    *
+    ************************/
+    var logentriesPrinter_ = function (priority, message) {
+
+      var ident = arguments.callee.ident || ''
+      
+      var payload = ident + '\t' + priority + '\t' + message
+
+      var options = {
+        payload: payload
+        , method: 'post'
+        , muteHttpExceptions: true
+      }
+
+    var endPoint = 'https://js.logentries.com/v1/logs/' + TOKEN
+    var response = UrlFetchApp.fetch(endPoint, options)
+    
+    return response.getResponseCode()==200
+
+    }
+    
+    logentriesPrinter_.isPrinter = function () { return 'LogEntries' }
+
+    return logentriesPrinter_
   }
   
   /**

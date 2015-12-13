@@ -83,6 +83,7 @@ It has 2 Printer now: (more will easy to be support in the furture)
 
 1. `GasLog.Printer.Logger`
 1. `GasLog.Printer.Spreadsheet`
+1. `GasLog.Printer.LogEntries`
 
 #### `GasLog.Printer.Logger`: The default Printer of GasLog
 
@@ -105,8 +106,7 @@ var log = new GasLog({
 
 It use a Spreadsheet URL or ID to specify a sheet, then log to that sheet.
 
-You need to specify the param of options:
-
+You need to specify the param of options: 
 1. `spreadsheet`(Spreadsheet): Google Spreadsheet object. You must have the write permisstion for that spreadsheet. (one of spreadsheet/url/id must be set)
 1. `id`(string): Google Spreadsheet id. You must have the write permisstion for that spreadsheet. (one of spreadsheet/url/id must be set)
 1. `url`(string): Google Spreadsheet url. You must have the write permisstion for that spreadsheet. (one of spreadsheet/url/id must be set)
@@ -130,6 +130,31 @@ var log = new GasLog({
   , logLevel: 'INFO'
 })
 ```
+
+#### `GasLog.Printer.LogEntries`: The Printer for LogEntries.com
+
+It use cloud logging service LogEntries to output.
+
+[Logentries](https://logentries.com) is a software as a service provider for log management and intelligence. Logentries collects and analyzes data found within log files, in real-time with a cloud-delivered approach.
+
+Create a new log set in LogEntries.com , with `Manual - Token TCP` option. then you will get a TOKEN for your log.
+
+Put TOKEN in the only options: token.
+
+```javascript
+var gaslLib='https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js'
+var GasLog = eval(UrlFetchApp.fetch(gaslLib).getContentText())
+
+var logentriesPrinter = new GasLog.Printer.LogEntries({
+  token: '4ea178f8-928d-3130-99ca-1f20ad803ec2' // this token is my logentries test log. welcome to write hello to me! :]
+})
+
+var log = new GasLog({
+  printer: logentriesPrinter
+})
+```
+
+Then all logs will be outputed to LogEntries cloud.
 
 ### `log(message)`: the simplest version
 
@@ -200,6 +225,49 @@ Then you are ready to use:
 var log = new GasLog(...)
 log(...)
 ```
+
+## How to implement a NEW Printer
+
+Printer for GasL is a function to write log message to somewhere. 
+
+Add a new Printer is easy, it require two steps:
+
+1. Write a new Printer function. (The default GasL Printer: `LoggerPrinter()` is a good template to start with.)
+1. Register the new Printer to GasL.
+
+### Write a new Printer functoin
+
+You can find the default LoggerPrinter() function in gas-log.js. copy & paste it, modify it, then you get your own Printer.
+
+```javascript
+function LoggerPrinter() {
+  var loggerPrinter_ = function (priority, message) {
+    return Logger.log(message)
+  }
+  
+  loggerPrinter_.isPrinter = function () { return 'Logger' }
+  return loggerPrinter_
+}
+```
+
+Notice that the `isPrinter()` is required to return a printer name. If this function is not exist or return false, then GasL will not consider this Printer is usable.
+
+### Register the new Printer to GasL
+
+After wrote your own Printer, the Printer must be register to GasL before use.
+
+Find the following code in gas-log.js, then add your new Printer to the end.
+
+```javascript
+gasLog_.Printer = {
+  Logger: LoggerPrinter
+  , Spreadsheet: SpreadsheetPrinter
+  , LogEntries: LogEntriesPrinter
+}
+```
+
+You are set!
+
 
 ## Support
 
