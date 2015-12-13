@@ -303,6 +303,11 @@ For real-world examples from open-source projects using GasL, see Projects Using
 
 ## Version history
 
+### 0.3.0 (December 13, 2015)
+* LogEntries support
+* new function: disable() & enable() 
+* GasLog.Printer implement document
+
 ### 0.2.0 (December 11, 2015)
 * Support set ident name in options
 
