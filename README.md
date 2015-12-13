@@ -303,6 +303,22 @@ For real-world examples from open-source projects using GasL, see Projects Using
 
 ## Version history
 
+### 0.4.0 (December 14, 2015)
+* bug fix for spreadsheet printer
+* support multi log instance for different ident
+
+Use v0.4.0 in GAS
+```javascript
+/**
+*
+* GasL v0.4.0 Initialization. (only if not initialized yet.)
+* https://github.com/zixia/gasl
+*
+if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
+  eval(UrlFetchApp.fetch('https://github.com/zixia/gasl/blob/v0.4.0/src/gas-log-lib.js').getContentText())
+} // Class GasLog is ready for use now!
+```
+
 ### 0.3.0 (December 13, 2015)
 * LogEntries support
 * new function: disable() & enable() 
