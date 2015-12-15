@@ -274,6 +274,11 @@ var GasLog = (function () {
         ident = this.ident
       }
       
+      var MAX_CHAR_NUM = 50000
+      if (message.length > MAX_CHAR_NUM) {
+        message = message.substring(0, MAX_CHAR_NUM)
+      }
+      
       var logRow = [new Date(), ident, priority, message]
 
       if (scroll=='UP') {
