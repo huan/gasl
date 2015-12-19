@@ -1,16 +1,17 @@
+# Chen Updated
 # GasL - Google Apps Script Logging-framework
 
-GasL is a unix syslog like logging framework for Google Apps Script(GAS). It provides easy way for the GAS programs to log messages to Spreadsheet, LogEntries, RESTFUL API and Logger of GAS.
+GasL is a unix syslog similar to the logging framework of Google Apps Script (GAS). It offers an easy way for GAS programs to log messages into Spreadsheets, LogEntries, RESTFUL API and GAS logger.
 
 Github: https://github.com/zixia/gasl
 
-In order to write to different log destinations, GasL comes with a components named `Printer`, which uses DI(Dependency Injection) to provide the write capacity. Under the hood, each Printer components is just a function with param for message, and write them out.
+In order to write into different log destinations, GasL comes with a components called `Printer`, which uses DI (Dependency Injection) to provide log entry functionalities. Behind the scenes, each Printer component is simply a function that accepts a parameter for message, and ouputs the content into log destinations.
 
-The following samples is runable. You maybe want to copy/paste it inside google script editor, then have a look by executing it.
+The sample scripts below are executable. You can copy/paste it to google script editor for testing purposes.
 
 ## Example 1 - Basic Usage
 
-This sample use Logger for output. "Ctrl + Enter" to get your logs.
+This sample uses Logger for output. "Ctrl + Enter" to get your logs.
 
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
@@ -24,7 +25,7 @@ log('Hello, %s!', 'World')
 
 ## Example 2 - Log to Google Spreadsheet:
 
-This sample use a spreadsheet to output. You can open the URL: https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0 , to see your log output.
+This sample uses a spreadsheet for output. You can view the log output from this URL: https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0
 
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
@@ -46,28 +47,28 @@ var log = new GasLog({
 log(log.INFO, 'Hello, %s!', 'Spreadsheet')
 ```
 
-GasL is designed for running javascript on Google Apps Script environment only.
+GasL is designed for running javascript on Google Apps Script environment ONLY.
 
 ## Module Methods
 
-There's a very simple example at https://github.com/zixia/gasl/blob/master/src/gasl-demo.js , which is the demo sample code of GasL.
+A simple example of GasL demo code can be found at https://github.com/zixia/gasl/blob/master/src/gasl-demo.js.
 
 ### `GasLog`: GasL Module
 
-We use eval to get GasLog module in our code:
+Eval is used to get GasLog module in the code:
 
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
   eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
 } // Class GasLog is ready for use now!
 ```
-GasLog is the main module name of GasL.
+GasLog is the main module of GasL.
 
-Constructor options:
+Constructor parameters:
 
-1. `printer`: Printer Component for DI. See the following `Printer` part.
+1. `printer`: Printer Component of DI. See the following `Printer` part.
 1. `priority`: Log priority. See the following `log(priority, format, ...)` part.
-1. `ident`: The name of the program who are loging.
+1. `ident`: The name of the program that are logging.
 
 ```javascript
 var loggerPrinter = new GasLog.Printer.Logger()
@@ -79,21 +80,21 @@ var log = new GasLog({
 })
 ```
 
-### `Printer`: Component for output DI
+### `Printer`: Component of output DI
 
 GasLog.Printer is used by injector to enable output to different destination of GasT.
 
-It has 2 Printer now: (more will easy to be support in the furture) 
+It currently supports 2 Printers: (more printers can be easily supported in the furture) 
 
 1. `GasLog.Printer.Logger`
 1. `GasLog.Printer.Spreadsheet`
 1. `GasLog.Printer.LogEntries`
 
-#### `GasLog.Printer.Logger`: The default Printer of GasLog
+#### `GasLog.Printer.Logger`: Default Printer of GasLog
 
-It use the Logger.log of Google Apps Script to output.
+It uses Logger.log of Google Apps Script to output.
 
-No need to set any options.
+No need to set any parameters.
 
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
@@ -109,9 +110,9 @@ var log = new GasLog({
 
 #### `GasLog.Printer.Spreadsheet`: Print to a spreadsheet
 
-It use a Spreadsheet URL or ID to specify a sheet, then log to that sheet.
+It uses a Spreadsheet URL or ID to specify a particular sheet, then log into that sheet.
 
-You need to specify the param of options: 
+The following parameters need to be configured: 
 1. `spreadsheet`(Spreadsheet): Google Spreadsheet object. You must have the write permisstion for that spreadsheet. (one of spreadsheet/url/id must be set)
 1. `id`(string): Google Spreadsheet id. You must have the write permisstion for that spreadsheet. (one of spreadsheet/url/id must be set)
 1. `url`(string): Google Spreadsheet url. You must have the write permisstion for that spreadsheet. (one of spreadsheet/url/id must be set)
@@ -139,11 +140,11 @@ var log = new GasLog({
 
 #### `GasLog.Printer.LogEntries`: The Printer for LogEntries.com
 
-It use cloud logging service LogEntries to output.
+It uses cloud logging service LogEntries to output.
 
-[Logentries](https://logentries.com) is a software as a service provider for log management and intelligence. Logentries collects and analyzes data found within log files, in real-time with a cloud-delivered approach.
+[Logentries](https://logentries.com) is a software as a service provider for log management and intelligence. LogEntries collects and analyzes data found inside log files, in real-time with a cloud-delivered approach.
 
-Create a new log set in LogEntries.com , with `Manual - Token TCP` option. then you will get a TOKEN for your log.
+Create a new log set in LogEntries.com, with `Manual - Token TCP` option, then you will get a TOKEN for your log.
 
 Put TOKEN in the only options: token.
 
@@ -165,20 +166,20 @@ Then all logs will be outputed to LogEntries cloud.
 
 ### `log(message)`: the simplest version
 
-Just use it as look:
+Simply use it as below:
 
 ```javascript
 log('Hello, World!')
 ```
 
-Then you message will be logged.
+Then your message will be logged.
 
-### `log(priority, format, ...)`: the unix syslog like function
+### `log(priority, format, ...)`: the unix syslog-like function
 
 log the message by `format` of `priority`.
 
-1. `format`: only support '%s' because javascript only has this.
-1. `priority`: should be one of the follow.
+1. `format`: only supports '%s' because javascript only provides this.
+1. `priority`: should be one of the following.
   1. `log.EMERG`
   1. `log.ALERT`
   1. `log.CRIT`
@@ -196,7 +197,7 @@ log(log.WARNING, 'This is a warning message: %s', msg)
 
 ### `log.setPriority(priority)`
 
-Set priority for this log.
+Set priority of this log.
 
 ```javascript
 log.setPriority(log.ERR)
@@ -204,7 +205,7 @@ log.setPriority(log.ERR)
 
 ### `log.getPriority()`
 
-Get priority for this log.
+Get priority of this log.
 
 ```javascript
 var priority = log.getPriority()
@@ -212,7 +213,7 @@ var priority = log.getPriority()
 
 ### `log.disable()`
 
-Disable for logging. all message will be discarded when the log is in disabled state.
+Disable for logging. all messages will be discarded when the log is set in Disabled state.
 
 ```javascript
 log.disable()
@@ -231,13 +232,13 @@ log.enable()
 ## Screen Snapshot
 ![GasL(GasLog) for GAS(Google Apps Script)](https://raw.githubusercontent.com/zixia/gasl/master/gasl-script-editor-screenshot.png)
 
-A online version of google spreadsheet bounded with GasL google apps scripts can be found here: 
+An online version of google spreadsheet bounded with GasL google apps scripts can be found here: 
 * Spreadsheet - https://docs.google.com/spreadsheets/d/19M2DY3hunU6tDQFX5buJmZ_f3E8VFmlqAtodyC-J8Ag/edit#gid=1761137024
 * Script editor - https://script.google.com/a/zixia.net/macros/d/Mta4oea1VMIugfSGRo4QrAnKRT9d30hqB/edit?uiv=2&mid=ACjPJvGt4gnXjJwXnToB0jIMEbSvqKUF6vH-uq-m59SqnjXqTQ03NDn_khlNE6ha_mPnrOAYEnyFk80nHYmt_hppO3AgDkO_vVLrYJXzcPPagwRromd0znfLreNFAu4p0rYTC-Jlo-sAKOM
 
 ## How to use GasL in Google Apps Script
 
-Use GasL is very easy: just copy/paste the following javascript code to your Code.gs file, then you are ready to use GasL.
+Use GasL is very simple: just copy/paste the following javascript section to your Code.gs file, then you are ready to use GasL.
 
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
@@ -252,18 +253,18 @@ var log = new GasLog(...)
 log(...)
 ```
 
-## How to implement a NEW Printer
+## How to implement a new Printer
 
-Printer for GasL is a function to write log message to somewhere. 
+Printer for GasL is a function to write log message into certain destinations. 
 
-Add a new Printer is easy, it require two steps:
+Adding a new Printer requires 2 steps:
 
 1. Write a new Printer function. (The default GasL Printer: `LoggerPrinter()` is a good template to start with.)
 1. Register the new Printer to GasL.
 
-### Write a new Printer functoin
+### Write a new Printer function
 
-You can find the default LoggerPrinter() function in gas-log-lib.js. copy & paste it, modify it, then you get your own Printer.
+You can find the default LoggerPrinter() function in gas-log-lib.js and modify it to make your own Printer.
 
 ```javascript
 function LoggerPrinter() {
@@ -276,11 +277,11 @@ function LoggerPrinter() {
 }
 ```
 
-Notice that the `isPrinter()` is required to return a printer name. If this function is not exist or return false, then GasL will not consider this Printer is usable.
+Notice that `isPrinter()` is required to return a Printer name. If this function does not exist or returns false, then GasL will not consider this Printer usable.
 
 ### Register the new Printer to GasL
 
-After wrote your own Printer, the Printer must be register to GasL before use.
+After creating your own Printer, this Printer must be registered to GasL before use.
 
 Find the following code in gas-log.js, then add your new Printer to the end.
 
@@ -292,14 +293,14 @@ gasLog_.Printer = {
 }
 ```
 
-You are set!
+You are all set!
 
 
 ## Support
 
-The GasL source code repository is hosted on GitHub. There you can file bugs on the issue tracker or submit tested pull requests for review. ( https://github.com/zixia/gasl/issues )
+The GasL source code repository is hosted on GitHub. There you can submit bugs on the issue tracker or submit tested pull requests for review. (https://github.com/zixia/gasl/issues)
 
-For real-world examples from open-source projects using GasL, see Projects Using TasL on the wiki. ( https://github.com/zixia/gasl/wiki )
+For real-world examples from open-source projects using GasL, see Projects Using TasL on the wiki. (https://github.com/zixia/gasl/wiki)
 
 ## Version history
 
