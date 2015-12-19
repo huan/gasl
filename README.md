@@ -263,7 +263,7 @@ Add a new Printer is easy, it require two steps:
 
 ### Write a new Printer functoin
 
-You can find the default LoggerPrinter() function in gas-log.js. copy & paste it, modify it, then you get your own Printer.
+You can find the default LoggerPrinter() function in gas-log-lib.js. copy & paste it, modify it, then you get your own Printer.
 
 ```javascript
 function LoggerPrinter() {

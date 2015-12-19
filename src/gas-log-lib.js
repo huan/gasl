@@ -1,4 +1,6 @@
 var GasLog = (function () {
+  'use strict'
+  
   /**************************************************************************************
   *
   * GasL - Class GasLog - Google Apps Script Loging-framework
@@ -11,7 +13,7 @@ var GasLog = (function () {
   * Example:
     ```javascript
     if ((typeof GasLog)==='undefined') { // Initialize Class GasLog for GasL. (only if not inited)
-      eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/gas-log.js').getContentText())
+      eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
     } // Class GasLog is ready for use now!
     
     var log = new GasLog()
