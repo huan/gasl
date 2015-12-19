@@ -142,11 +142,8 @@ var GasLog = (function () {
           break;
           
         case 'string':
-          break;
-          
         default:
-          throw Error('doLog(' + args[0] + ') need 1st param either be string or number!')
-          break;
+          break          
       }
       
       
