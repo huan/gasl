@@ -112,6 +112,7 @@ var log = new GasLog({
 It uses a Spreadsheet URL or ID to specify a particular sheet, then log into that sheet.
 
 The following parameters need to be configured: 
+
 1. `spreadsheet`(Spreadsheet): Google Spreadsheet object. You must have the write permisstion for that spreadsheet. (one of spreadsheet/url/id must be set)
 1. `id`(string): Google Spreadsheet id. You must have the write permisstion for that spreadsheet. (one of spreadsheet/url/id must be set)
 1. `url`(string): Google Spreadsheet url. You must have the write permisstion for that spreadsheet. (one of spreadsheet/url/id must be set)
