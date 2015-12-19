@@ -1,4 +1,3 @@
-# Chen Updated
 # GasL - Google Apps Script Logging-framework
 
 GasL is a unix syslog similar to the logging framework of Google Apps Script (GAS). It offers an easy way for GAS programs to log messages into Spreadsheets, LogEntries, RESTFUL API and GAS logger.
