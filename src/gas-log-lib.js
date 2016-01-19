@@ -160,9 +160,10 @@ var GasLog = (function () {
       
       var message = ''
       try {
-        message = Utilities.formatString.apply(null, args);
+        args = args.map(function (v) { return v ? v : 'undefined' })
+        message = Utilities.formatString.apply(null, args)
       } catch (e) {
-        message = args.join(' !!! ')
+        message = args.join(' !!! ') + e.name + ':' + e.message
       }
             
       // bind this, for acess instance logIdent
