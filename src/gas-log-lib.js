@@ -332,11 +332,21 @@ var GasLog = (function () {
         , muteHttpExceptions: true
       }
 
-    var endPoint = 'https://js.logentries.com/v1/logs/' + TOKEN
-    var response = UrlFetchApp.fetch(endPoint, options)
-    
-    return response.getResponseCode()==200
+      var endPoint = 'https://js.logentries.com/v1/logs/' + TOKEN
+      var retCode
 
+      try { 
+        var response = UrlFetchApp.fetch(endPoint, options)
+        retCode = response.getResponseCode()
+      } catch (e) {
+        /**
+        *
+        * XXX for authMode = NONE
+        * we drop log and treat it success
+        *
+        */
+      }      
+      return retCode==200
     }
     
     logentriesPrinter_.isPrinter = function () { return 'LogEntries' }
