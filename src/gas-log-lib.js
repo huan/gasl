@@ -342,7 +342,7 @@ var GasLog = (function () {
         /**
         *
         * XXX for authMode = NONE
-        * we drop log and treat it success
+        * we drop log and will return false
         *
         */
       }      
