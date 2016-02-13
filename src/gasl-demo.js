@@ -19,9 +19,9 @@ function gaslTestRunner() {
   */
   
   
-  gaslForPrinter()
   gaslForTestPriority()
   gaslForSpreadSheet()
+  gaslForPrinter()
   gaslForLogEntries()
   
   

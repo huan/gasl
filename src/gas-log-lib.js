@@ -39,7 +39,7 @@ var GasLog = (function () {
   * GasLog Constructor
   *
   ****************************************************/ 
-  var gasLog_ = function (options) {
+  var GasLog = function (options) {
    
     var logPriority = PRIORITIES.DEBUG
     var isDisabled = false
@@ -161,6 +161,7 @@ var GasLog = (function () {
       var message = ''
       try {
         args = args.map(function (v) { return (typeof v)==='undefined' ? 'undefined' : v })
+        if (typeof args[0] != 'string') args[0] = String(args[0]) // compatible with log(new Date()) . or will cause error. 20160213
         message = Utilities.formatString.apply(null, args)
       } catch (e) {
         message = args.join(' !!! ') + e.name + ':' + e.message
@@ -177,13 +178,13 @@ var GasLog = (function () {
   * Class Static Methods Export
   *
   *********************************/
-  gasLog_.Printer = {
+  GasLog.Printer = {
     Logger: LoggerPrinter
     , Spreadsheet: SpreadsheetPrinter
     , LogEntries: LogEntriesPrinter
   }
   
-  return gasLog_
+  return GasLog
   
   
   ///////////////////////////////////////////////////////////////////////////////
