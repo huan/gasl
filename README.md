@@ -2,7 +2,7 @@
 
 GasL is a unix syslog similar to the logging framework of Google Apps Script (GAS). It offers an easy way for GAS programs to log messages into Spreadsheets, LogEntries, RESTFUL API and GAS logger.
 
-Github: https://github.com/zixia/gasl
+Github: <https://github.com/huan/gasl>
 
 In order to write into different log destinations, GasL comes with a components called `Printer`, which uses DI (Dependency Injection) to provide log entry functionalities. Behind the scenes, each Printer component is simply a function that accepts a parameter for message, and ouputs the content into log destinations.
 
@@ -14,21 +14,21 @@ This sample uses Logger for output. "Ctrl + Enter" to get your logs.
 
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
-  eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
+  eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/huan/gasl/master/src/gas-log-lib.js').getContentText())
 } // Class GasLog is ready for use now!
 
 var log = new GasLog()
-    
+
 log('Hello, %s!', 'World')
 ```
 
 ## Example 2 - Log to Google Spreadsheet:
 
-This sample uses a spreadsheet for output. You can view the log output from this URL: https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0
+This sample uses a spreadsheet for output. You can view the log output from this URL: <https://docs.google.com/spreadsheets/d/1_KRAtoDz2Pdcj9IPZI007I_gMzRyfmXf7gicgxVwYJc/edit#gid=0>
 
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
-  eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
+  eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/huan/gasl/master/src/gas-log-lib.js').getContentText())
 } // Class GasLog is ready for use now!
 
 var sheetPrinter = new GasLog.Printer.Spreadsheet({
@@ -61,6 +61,7 @@ if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initia
   eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
 } // Class GasLog is ready for use now!
 ```
+
 GasLog is the main module of GasL.
 
 Constructor parameters:
@@ -97,7 +98,7 @@ No need to set any parameters.
 
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
-  eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
+  eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/huan/gasl/master/src/gas-log-lib.js').getContentText())
 } // Class GasLog is ready for use now!
 
 var loggerPrinter = new GasLog.Printer.Logger()
@@ -122,7 +123,7 @@ The following parameters need to be configured:
 
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
-  eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
+  eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/huan/gasl/master/src/gas-log-lib.js').getContentText())
 } // Class GasLog is ready for use now!
 
 var sheetPrinter = new GasLog.Printer.Spreadsheet({
@@ -228,13 +229,14 @@ Enable for logging.
 log.enable()
 ```
 
-
 ## Screen Snapshot
-![GasL(GasLog) for GAS(Google Apps Script)](https://raw.githubusercontent.com/zixia/gasl/master/gasl-script-editor-screenshot.png)
 
-An online version of google spreadsheet bounded with GasL google apps scripts can be found here: 
-* Spreadsheet - https://docs.google.com/spreadsheets/d/19M2DY3hunU6tDQFX5buJmZ_f3E8VFmlqAtodyC-J8Ag/edit#gid=1761137024
-* Script editor - https://script.google.com/a/zixia.net/macros/d/Mta4oea1VMIugfSGRo4QrAnKRT9d30hqB/edit?uiv=2&mid=ACjPJvGt4gnXjJwXnToB0jIMEbSvqKUF6vH-uq-m59SqnjXqTQ03NDn_khlNE6ha_mPnrOAYEnyFk80nHYmt_hppO3AgDkO_vVLrYJXzcPPagwRromd0znfLreNFAu4p0rYTC-Jlo-sAKOM
+![GasL(GasLog) for GAS(Google Apps Script)](https://raw.githubusercontent.com/huan/gasl/master/gasl-script-editor-screenshot.png)
+
+An online version of google spreadsheet bounded with GasL google apps scripts can be found here:
+
+* Spreadsheet - <https://docs.google.com/spreadsheets/d/19M2DY3hunU6tDQFX5buJmZ_f3E8VFmlqAtodyC-J8Ag/edit#gid=1761137024>
+* Script editor - <https://script.google.com/a/zixia.net/macros/d/Mta4oea1VMIugfSGRo4QrAnKRT9d30hqB/edit?uiv=2&mid=ACjPJvGt4gnXjJwXnToB0jIMEbSvqKUF6vH-uq-m59SqnjXqTQ03NDn_khlNE6ha_mPnrOAYEnyFk80nHYmt_hppO3AgDkO_vVLrYJXzcPPagwRromd0znfLreNFAu4p0rYTC-Jlo-sAKOM>
 
 ## How to use GasL in Google Apps Script
 
@@ -242,7 +244,7 @@ Use GasL is very simple: just copy/paste the following javascript section to you
 
 ```javascript
 if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initialized yet.)
-  eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
+  eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/huan/gasl/master/src/gas-log-lib.js').getContentText())
 } // Class GasLog is ready for use now!
 ```
 
@@ -295,24 +297,25 @@ gasLog_.Printer = {
 
 You are all set!
 
-
 ## Support
 
-The GasL source code repository is hosted on GitHub. There you can submit bugs on the issue tracker or submit tested pull requests for review. (https://github.com/zixia/gasl/issues)
+The GasL source code repository is hosted on GitHub. There you can submit bugs on the issue tracker or submit tested pull requests for review. (<https://github.com/huan/gasl/issues>)
 
-For real-world examples from open-source projects using GasL, see Projects Using TasL on the wiki. (https://github.com/zixia/gasl/wiki)
+For real-world examples from open-source projects using GasL, see Projects Using TasL on the wiki. (<https://github.com/zixia/gasl/wiki>)
 
 ## Version history
 
-### [v0.4.0](https://github.com/zixia/gasl/releases/tag/v0.4.0) (December 14, 2015)
+### [v0.4.0](https://github.com/huan/gasl/releases/tag/v0.4.0) (December 14, 2015)
+
 * bug fix for spreadsheet printer
 * support multi log instance for different ident
 * LogEntries support
-* new function: disable() & enable() 
+* new function: disable() & enable()
 * GasLog.Printer implement document
 * Support set ident name in options
 
 Use v0.4.0 in GAS
+
 ```javascript
 /**
 *
@@ -326,7 +329,8 @@ if ((typeof GasLog)==='undefined') { // GasL Initialization. (only if not initia
 ```
 
 ### v0.1.0 (December 10, 2015)
+
 * Initial public release.
 
 -------------------------------------------
-© 2015 Zhuohuan LI. GasL is released under an MIT-style license; see LICENSE for details.
+© 2015 Huan LI <zixia@zixia.net>. GasL is released under an MIT-style license; see LICENSE for details.

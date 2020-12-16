@@ -3,7 +3,7 @@ var GasLog = (function () {
   
   /**************************************************************************************
   *
-  * GasL - Class GasLog - Google Apps Script Loging-framework
+  * GasL - Class GasLog - Google Apps Script Logging-framework
   *
   * Support log to Spreadsheet / Logger / LogEntries(next version) , 
   * and very easy to extended to others.
@@ -12,7 +12,7 @@ var GasLog = (function () {
   *
   * Example:
     ```javascript
-    if ((typeof GasLog)==='undefined') { // Initialize Class GasLog for GasL. (only if not inited)
+    if ((typeof GasLog)==='undefined') { // Initialize Class GasLog for GasL. (only if not initialized)
       eval(UrlFetchApp.fetch('https://raw.githubusercontent.com/zixia/gasl/master/src/gas-log-lib.js').getContentText())
     } // Class GasLog is ready for use now!
     
@@ -94,7 +94,7 @@ var GasLog = (function () {
 
     
     //////////////////////////////////////////////////////////////
-    // Instance Methods Implementions
+    // Instance Methods Implementations
     //////////////////////////////////////////////////////////////
     
     
@@ -167,7 +167,7 @@ var GasLog = (function () {
         message = args.join(' !!! ') + e.name + ':' + e.message
       }
             
-      // bind this, for acess instance logIdent
+      // bind this, for access instance logIdent
       logPrinter.call({ident: logIdent}, priority, message)
       
     }
@@ -317,7 +317,7 @@ var GasLog = (function () {
     * LogEntries Printer 
     *
     ************************/
-    var logentriesPrinter_ = function (priority, message) {
+    var logEntriesPrinter_ = function (priority, message) {
 
       var ident = ''
       if (this && this.ident) {
@@ -349,9 +349,9 @@ var GasLog = (function () {
       return retCode==200
     }
     
-    logentriesPrinter_.isPrinter = function () { return 'LogEntries' }
+    logEntriesPrinter_.isPrinter = function () { return 'LogEntries' }
 
-    return logentriesPrinter_
+    return logEntriesPrinter_
   }
   
   /**
@@ -372,7 +372,7 @@ var GasLog = (function () {
       }
     } 
     
-    throw Error('options.priority[' + priority + '] illegel')
+    throw Error('options.priority[' + priority + '] illegal')
   }
 
 }())
